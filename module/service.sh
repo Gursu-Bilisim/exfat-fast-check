@@ -3,6 +3,7 @@
 # "unmountable" because they are marked dirty, without vold's time limit,
 # then asks vold to mount them.
 # Author: kgursu (Gursu-Bilisim @ GitHub)
+# SPDX-License-Identifier: GPL-3.0-or-later
 # Manual run: su -c sh /data/adb/modules/exfat-fast-check/service.sh
 export PATH=/system/bin:/system/xbin:/vendor/bin:$PATH
 MODDIR=/data/adb/modules/exfat-fast-check

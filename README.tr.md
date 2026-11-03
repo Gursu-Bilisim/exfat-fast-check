@@ -105,4 +105,6 @@ Modülü yönetici uygulamadan kaldır ve yeniden başlat. `/system/bin/fsck.exf
 
 ## Lisans
 
-<seçilecek lisans>
+GPL-3.0-or-later. Ayrıntı: [LICENSE](LICENSE).
+
+Modül exfatprogs içermez: `fsck.exfat-full` kurulum sırasında cihazdaki ROM'dan kopyalanır.

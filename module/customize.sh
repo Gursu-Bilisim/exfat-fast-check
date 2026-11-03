@@ -1,5 +1,6 @@
 # exFAT Fast Check: install / kurulum
 # Author: kgursu (Gursu-Bilisim @ GitHub)
+# SPDX-License-Identifier: GPL-3.0-or-later
 ID=exfat-fast-check
 OLD_ID=exfat-hizli-denetim
 

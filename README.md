@@ -105,4 +105,6 @@ Needs `zig` (or `pip install ziglang`) and `zip`. The zip is written to `dist/`.
 
 ## License
 
-<license to be chosen>
+GPL-3.0-or-later. See [LICENSE](LICENSE).
+
+The module does not ship exfatprogs: `fsck.exfat-full` is copied from the ROM on the device during installation.

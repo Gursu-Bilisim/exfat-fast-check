@@ -1,6 +1,7 @@
 /*
  * exfat-fast-check: wrapper installed over /system/bin/fsck.exfat
  * Author: kgursu (Gursu-Bilisim @ GitHub)
+ * SPDX-License-Identifier: GPL-3.0-or-later
  *
  * vold checks public volumes with "fsck.exfat -y <device>" and kills the
  * check after 45 seconds. On large, well-filled cards a full check takes

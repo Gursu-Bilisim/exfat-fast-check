@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: GPL-3.0-or-later
 # Builds the wrapper (static aarch64) and the installable module zip.
 # Needs: zig (pip install ziglang, or a zig binary on PATH), zip.
 set -euo pipefail
