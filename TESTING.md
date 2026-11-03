@@ -71,7 +71,7 @@ Read-only full check after the tests: `clean. directories 8731, files 35329`.
   | Power icon on FolkPatch's home screen (09:25) | clean, `Check OK` (check took 9 ms) |
   | Module reinstalled, install screen left with Back, then power menu (09:31) | clean, mounted 6 s after boot completed |
 
-  So the install itself does not leave the card dirty; the install screen's Reboot button does. In every case the card was mounted at the end.
+  In FolkPatch's source (commit `0f3f42b`, the tested manager build) both the install screen's Reboot button (`ui/screen/patches/Install.kt`) and the home screen's Reboot entry (`ui/screen/home/HomeTopBar.kt`) call the same `reboot()` in `util/APatchCli.kt`, which runs `/system/bin/svc power reboot || /system/bin/reboot`. The buttons themselves do not differ; what made the card dirty on those three boots is not known yet. In every case the card was mounted at the end.
 - Reinstalling the module replaces its folder, so `check.log` starts empty after each install.
 
 ## Not tested yet
