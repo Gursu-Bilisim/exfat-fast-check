@@ -69,9 +69,11 @@ Testlerden sonra salt okunur tam denetim: `clean. directories 8731, files 35329`
   | FolkPatch kurulum ekranındaki Yeniden Başlat (08:09, 08:47, 09:02) | kirli, `service.sh` onardı |
   | Sistem güç menüsü (09:11) | temiz, `Check OK` |
   | FolkPatch ana ekranındaki güç simgesi (09:25) | temiz, `Check OK` (denetim 9 ms) |
-  | Modül yeniden kuruldu, kurulum ekranından Geri ile çıkıldı, güç menüsü (09:31) | temiz, açılış tamamlandıktan 6 sn sonra bağlandı |
+  | Modül yeniden kuruldu, kurulum ekranından Geri ile çıkıldı, FolkPatch güç simgesi (09:31) | temiz, açılış tamamlandıktan 6 sn sonra bağlandı |
+  | Sistem güç düğmesi (09:44) | temiz |
+  | Modül yeniden kuruldu, kurulum ekranındaki Yeniden Başlat (09:55) | temiz, açılış tamamlandıktan 16 sn sonra bağlandı |
 
-  FolkPatch kaynağında (commit `0f3f42b`, test edilen yönetici sürümü) kurulum ekranındaki Yeniden Başlat düğmesi (`ui/screen/patches/Install.kt`) ile ana ekrandaki Yeniden Başlat seçeneği (`ui/screen/home/HomeTopBar.kt`) aynı `reboot()` fonksiyonunu (`util/APatchCli.kt`) çağırıyor: `/system/bin/svc power reboot || /system/bin/reboot`. Düğmeler arasında fark yok; o üç açılışta kartı neyin kirli bıraktığı henüz bilinmiyor. Her durumda kart sonunda bağlandı.
+  FolkPatch kaynağında (commit `0f3f42b`, test edilen yönetici sürümü) kurulum ekranındaki Yeniden Başlat düğmesi (`ui/screen/patches/Install.kt`) ile ana ekrandaki Yeniden Başlat seçeneği (`ui/screen/home/HomeTopBar.kt`) aynı `reboot()` fonksiyonunu (`util/APatchCli.kt`) çağırıyor: `/system/bin/svc power reboot || /system/bin/reboot`. Düğmeler arasında fark yok ve 09:55'te kurulum ekranındaki düğmeyle yapılan deneme kartı temiz bıraktı; önceki üç açılışta kartı neyin kirli bıraktığı henüz bilinmiyor. Her durumda kart sonunda bağlandı.
 - Modülü yeniden kurmak klasörünü değiştirdiği için `check.log` her kurulumdan sonra boş başlıyor.
 
 ## Henüz denenmeyenler

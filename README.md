@@ -67,7 +67,7 @@ The module does not change what happens to a card that is marked dirty: it still
 
    ![Install log](docs/img/en/04-install-log.png)
 
-8. After the reboot the module appears in System Module as exFAT Fast Check v1.0. With Hybrid Mount, its line shows `OverlayFS: 1`. In the tests, the reboot started from the install screen's Reboot button left the card dirty each time; on that boot the card is repaired and mounted about two minutes after startup. Later reboots mounted it right away.
+8. After the reboot the module appears in System Module as exFAT Fast Check v1.0. With Hybrid Mount, its line shows `OverlayFS: 1`. If the card was not unmounted cleanly before the reboot, it is repaired and mounted about two minutes after startup; otherwise it is mounted right away. During testing this happened on three of eight reboots; the cause is not known yet (see [TESTING.md](TESTING.md)).
 
    ![Module list after reboot](docs/img/en/05-module-list.png)
 
