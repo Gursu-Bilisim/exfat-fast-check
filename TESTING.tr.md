@@ -2,7 +2,7 @@
 
 [English](TESTING.md)
 
-Cihaz: SM-T970 (gts7xlwifi), LineageOS `24.0-20261029-nightly`, FolkPatch 115404 (KernelPatch 0.13.9), Hybrid Mount (OverlayFS kipi). Kart: 2 TB exFAT, 8730 dizin, 35329 dosya. exfatprogs 1.4.3. Testler Türkçe adlı önceki derlemeyle (`exfat-hizli-denetim` v1.1 ve v1.3) yapıldı; bu deponun v1.0 sürümü aynı mantığı İngilizce adlarla içeriyor.
+Cihaz: SM-T970 (gts7xlwifi), LineageOS `24.0-20261029-nightly`, FolkPatch 115404 (KernelPatch 0.13.9), Hybrid Mount 6.2.5 (OverlayFS kipi). Kart: 2 TB exFAT, 8730 dizin, 35329 dosya. exfatprogs 1.4.3. Testler Türkçe adlı önceki derlemeyle (`exfat-hizli-denetim` v1.1 ve v1.3) yapıldı; bu deponun v1.0 sürümü aynı mantığı İngilizce adlarla içeriyor.
 
 ## Modülden önce
 
@@ -33,6 +33,20 @@ Kart ayrıldı, VolumeFlags elle `02` yapıldı, yeniden başlatıldı. vold'un 
 06:36:51 public:179,1: sm mount requested
 06:36:57 public:179,1 (5A75-7508): mounted
 ```
+
+## Yayın zip'i (v1.0, SHA-256 d88419163b49cfcf…)
+
+08:46'da test derlemesinin üzerine kuruldu, kurulum ekranındaki Yeniden Başlat ile açıldı. Kart kirli geldi ve `service.sh` onardı:
+
+```
+08:48:20  E vold : Check failed (code 110)
+08:48:23  public:179,1 (5A75-7508): unmountable, VolumeFlags=0x02, full check started
+08:49:40  public:179,1: full check finished, exit code 0
+08:49:40  I vold : Check OK
+08:49:46  public:179,1 (5A75-7508): mounted
+```
+
+Sarmalayıcı ve kopya yerinde (`grep -c` = 2, iki dosya da `u:object_r:fsck_exec:s0`); Türkçe adlı önceki modülü kurulum kaldırdı.
 
 ## Test sırasında bulunanlar
 

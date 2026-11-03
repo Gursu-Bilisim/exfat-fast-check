@@ -51,9 +51,25 @@ The module does not change what happens to a card that is marked dirty: it still
    adb push exfat-fast-check-v1.0.zip /sdcard/Download/
    ```
 3. FolkPatch / APatch / KernelSU: if your manager needs a metamodule for `system/` files (for example Hybrid Mount), install that first and reboot once. Without the reboot the manager does not accept other modules.
-4. FolkPatch: open the System Module tab, tap the round button at the bottom right, then Install. In the file picker open Downloads, select `exfat-fast-check-v1.0.zip` and tap Select. Confirm with OK.
-5. The install log ends with `- Done`. Tap Reboot.
-6. After the reboot the module appears in System Module as exFAT Fast Check v1.0.
+4. FolkPatch: open the System Module tab, tap the round button at the bottom right, then Install.
+
+   ![System Module, Install button](docs/img/en/01-system-module-install.png)
+
+5. In the file picker open Downloads, select `exfat-fast-check-v1.0.zip` and tap Select.
+
+   ![File picker, Downloads](docs/img/en/02-file-picker.png)
+
+6. Confirm with OK.
+
+   ![Install Module dialog](docs/img/en/03-confirm.png)
+
+7. The install log lists the module files and ends with `- Done`. Tap Reboot.
+
+   ![Install log](docs/img/en/04-install-log.png)
+
+8. After the reboot the module appears in System Module as exFAT Fast Check v1.0. With Hybrid Mount, its line shows `OverlayFS: 1`.
+
+   ![Module list after reboot](docs/img/en/05-module-list.png)
 
 ## Checking the result
 
@@ -63,13 +79,27 @@ After boot (allow 3 minutes if the card was dirty):
 adb shell "sm list-volumes all"
 ```
 
-The card should be `mounted`. To confirm the wrapper is in place and labelled:
+The card should be `mounted`:
+
+```
+private mounted null
+public:179,1 mounted 5A75-7508
+emulated;0 mounted null
+```
+
+To confirm the wrapper is in place and labelled:
 
 ```
 adb shell "su -c 'grep -c exfat-fast-check /system/bin/fsck.exfat; ls -lZ /system/bin/fsck.exfat /system/bin/fsck.exfat-full'"
 ```
 
-Expected: a number of 1 or more, and both files with `u:object_r:fsck_exec:s0`.
+Expected: a number of 1 or more, and both files with `u:object_r:fsck_exec:s0`:
+
+```
+2
+-rwxr-xr-x 1 root shell u:object_r:fsck_exec:s0  27304 ... /system/bin/fsck.exfat
+-rwxr-xr-x 1 root shell u:object_r:fsck_exec:s0  77624 ... /system/bin/fsck.exfat-full
+```
 
 What happened at boot:
 
@@ -78,7 +108,23 @@ adb shell "su -c 'cat /data/adb/modules/exfat-fast-check/check.log'"
 adb shell "logcat -d -b all | grep -iE 'exfat-fast-check|Check OK|Check failed|avc.*fsck'"
 ```
 
-A clean card shows `I vold : Check OK` a few seconds after boot. An `avc ... fsck_exec` denial means the root solution did not load `sepolicy.rule` or did not keep the file labels.
+A clean card shows `I vold : Check OK` a few seconds after boot. A card that was left dirty shows vold's timeout first and the repair about two minutes later; `check.log` from the test device:
+
+```
+2026-11-03 08:47:30 boot completed
+2026-11-03 08:48:23 public:179,1 (5A75-7508): unmountable, VolumeFlags=0x02, full check started
+exfatprogs version : 1.4.3 (2026-08-14)
+/dev/block/vold/public:179,1: clean. directories 8731, files 35329
+2026-11-03 08:49:40 public:179,1: full check finished, exit code 0
+2026-11-03 08:49:41 public:179,1: sm mount requested
+2026-11-03 08:49:46 public:179,1 (5A75-7508): mounted
+```
+
+An `avc ... fsck_exec` denial means the root solution did not load `sepolicy.rule` or did not keep the file labels. A `denied { read } ... tcontext=u:object_r:sysfs:s0` line for `fsck.exfat-full` also appears without the module and does not affect the check.
+
+The FolkPatch home screen shows which mount implementation is active (Mount Implementation):
+
+![FolkPatch home screen](docs/img/en/06-folkpatch-home.png)
 
 ## Manual use
 

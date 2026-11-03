@@ -51,9 +51,25 @@ Modül kirli işaretli bir kartın denetimini atlamaz: tam denetim yine yapılı
    adb push exfat-fast-check-v1.0.zip /sdcard/Download/
    ```
 3. FolkPatch / APatch / KernelSU: yönetici uygulaman `system/` dosyaları için bir metamodül istiyorsa (örneğin Hybrid Mount) önce onu kur ve bir kez yeniden başlat. Yeniden başlatmadan uygulama başka modül kabul etmiyor.
-4. FolkPatch: Sistem Modülü sekmesini aç, sağ alttaki yuvarlak düğmeye ve ardından Kur'a dokun. Dosya seçicide İndirilenler'i aç, `exfat-fast-check-v1.0.zip` dosyasını seç ve Seç'e dokun. Onay penceresinde Tamam'a dokun.
-5. Kurulum kaydı `- Done` satırıyla biter. Yeniden Başlat'a dokun.
-6. Açılıştan sonra modül Sistem Modülü sekmesinde exFAT Fast Check v1.0 olarak görünür.
+4. FolkPatch: Sistem Modülü sekmesini aç, sağ alttaki yuvarlak düğmeye ve ardından Kur'a dokun.
+
+   ![Sistem Modülü, Kur düğmesi](docs/img/tr/01-system-module-install.png)
+
+5. Dosya seçicide İndirilenler'i aç, `exfat-fast-check-v1.0.zip` dosyasını seç ve Seç'e dokun.
+
+   ![Dosya seçici, İndirilenler](docs/img/tr/02-file-picker.png)
+
+6. Onay penceresinde Tamam'a dokun.
+
+   ![Modül Kur penceresi](docs/img/tr/03-confirm.png)
+
+7. Kurulum kaydı modül dosyalarını listeler ve `- Done` satırıyla biter. Yeniden Başlat'a dokun.
+
+   ![Kurulum kaydı](docs/img/tr/04-install-log.png)
+
+8. Açılıştan sonra modül Sistem Modülü sekmesinde exFAT Fast Check v1.0 olarak görünür. Hybrid Mount kullanılıyorsa onun satırında `OverlayFS: 1` yazar.
+
+   ![Açılıştan sonra modül listesi](docs/img/tr/05-module-list.png)
 
 ## Sonucu kontrol etme
 
@@ -63,13 +79,27 @@ Açılıştan sonra (kart kirliyse 3 dakika bekle):
 adb shell "sm list-volumes all"
 ```
 
-Kart `mounted` görünmeli. Sarmalayıcının yerinde ve doğru etiketli olduğunu görmek için:
+Kart `mounted` görünmeli:
+
+```
+private mounted null
+public:179,1 mounted 5A75-7508
+emulated;0 mounted null
+```
+
+Sarmalayıcının yerinde ve doğru etiketli olduğunu görmek için:
 
 ```
 adb shell "su -c 'grep -c exfat-fast-check /system/bin/fsck.exfat; ls -lZ /system/bin/fsck.exfat /system/bin/fsck.exfat-full'"
 ```
 
-Beklenen: 1 veya daha büyük bir sayı ve iki dosyada da `u:object_r:fsck_exec:s0`.
+Beklenen: 1 veya daha büyük bir sayı ve iki dosyada da `u:object_r:fsck_exec:s0`:
+
+```
+2
+-rwxr-xr-x 1 root shell u:object_r:fsck_exec:s0  27304 ... /system/bin/fsck.exfat
+-rwxr-xr-x 1 root shell u:object_r:fsck_exec:s0  77624 ... /system/bin/fsck.exfat-full
+```
 
 Açılışta ne olduğu:
 
@@ -78,7 +108,23 @@ adb shell "su -c 'cat /data/adb/modules/exfat-fast-check/check.log'"
 adb shell "logcat -d -b all | grep -iE 'exfat-fast-check|Check OK|Check failed|avc.*fsck'"
 ```
 
-Temiz bir kartta açılıştan birkaç saniye sonra `I vold : Check OK` görünür. `avc ... fsck_exec` reddi, root çözümünün `sepolicy.rule` dosyasını yüklemediğini ya da dosya etiketlerini korumadığını gösterir.
+Temiz bir kartta açılıştan birkaç saniye sonra `I vold : Check OK` görünür. Kirli kalmış bir kartta önce vold'un zaman aşımı, yaklaşık iki dakika sonra onarım görünür. Test cihazındaki `check.log`:
+
+```
+2026-11-03 08:47:30 boot completed
+2026-11-03 08:48:23 public:179,1 (5A75-7508): unmountable, VolumeFlags=0x02, full check started
+exfatprogs version : 1.4.3 (2026-08-14)
+/dev/block/vold/public:179,1: clean. directories 8731, files 35329
+2026-11-03 08:49:40 public:179,1: full check finished, exit code 0
+2026-11-03 08:49:41 public:179,1: sm mount requested
+2026-11-03 08:49:46 public:179,1 (5A75-7508): mounted
+```
+
+`avc ... fsck_exec` reddi, root çözümünün `sepolicy.rule` dosyasını yüklemediğini ya da dosya etiketlerini korumadığını gösterir. `fsck.exfat-full` için görülen `denied { read } ... tcontext=u:object_r:sysfs:s0` satırı modül olmadan da çıkar ve denetimi etkilemez.
+
+FolkPatch ana ekranı hangi bağlama yönteminin etkin olduğunu gösterir (Mount Uygulaması):
+
+![FolkPatch ana ekranı](docs/img/tr/06-folkpatch-home.png)
 
 ## Elle kullanım
 

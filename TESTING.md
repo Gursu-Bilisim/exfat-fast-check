@@ -2,7 +2,7 @@
 
 [Türkçe](TESTING.tr.md)
 
-Device: SM-T970 (gts7xlwifi), LineageOS `24.0-20261029-nightly`, FolkPatch 115404 (KernelPatch 0.13.9), Hybrid Mount (OverlayFS mode). Card: 2 TB exFAT, 8730 directories, 35329 files. exfatprogs 1.4.3. Tests made with the earlier Turkish-named build (`exfat-hizli-denetim` v1.1 and v1.3); v1.0 of this repository has the same logic with English names.
+Device: SM-T970 (gts7xlwifi), LineageOS `24.0-20261029-nightly`, FolkPatch 115404 (KernelPatch 0.13.9), Hybrid Mount 6.2.5 (OverlayFS mode). Card: 2 TB exFAT, 8730 directories, 35329 files. exfatprogs 1.4.3. Tests made with the earlier Turkish-named build (`exfat-hizli-denetim` v1.1 and v1.3); v1.0 of this repository has the same logic with English names.
 
 ## Before the module
 
@@ -33,6 +33,20 @@ Card unmounted, VolumeFlags set to `02` by hand, reboot. vold's check (real chec
 06:36:51 public:179,1: sm mount requested
 06:36:57 public:179,1 (5A75-7508): mounted
 ```
+
+## Release zip (v1.0, SHA-256 d88419163b49cfcf…)
+
+Installed over the test build at 08:46 and rebooted from the installer's Reboot button. The card came up dirty and was repaired by `service.sh`:
+
+```
+08:48:20  E vold : Check failed (code 110)
+08:48:23  public:179,1 (5A75-7508): unmountable, VolumeFlags=0x02, full check started
+08:49:40  public:179,1: full check finished, exit code 0
+08:49:40  I vold : Check OK
+08:49:46  public:179,1 (5A75-7508): mounted
+```
+
+Wrapper and copy in place (`grep -c` = 2, both files `u:object_r:fsck_exec:s0`); the earlier Turkish-named module was removed by the installer.
 
 ## Found during testing
 
