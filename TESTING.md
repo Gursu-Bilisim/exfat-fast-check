@@ -62,7 +62,17 @@ Read-only full check after the tests: `clean. directories 8731, files 35329`.
 
 - `sys.boot_completed` is set before vold lists the card; at that moment `sm list-volumes public` returns nothing and the card appears about 10 seconds later as `checking`. `service.sh` therefore polls the list for up to 5 minutes.
 - With Hybrid Mount, the manager accepts other modules only after one reboot following the Hybrid Mount install.
-- Rebooting with the Reboot button on FolkPatch's install screen left the card dirty in all three cases (08:09, 08:47, 09:02); a reboot from the power menu (03:38, 09:11) left it clean. In both cases the card was mounted at the end.
+- Reboot method and card state on the next boot:
+
+  | Reboot | Card |
+  |---|---|
+  | Reboot button on FolkPatch's install screen (08:09, 08:47, 09:02) | dirty, repaired by `service.sh` |
+  | System power menu (09:11) | clean, `Check OK` |
+  | Power icon on FolkPatch's home screen (09:25) | clean, `Check OK` (check took 9 ms) |
+  | Module reinstalled, install screen left with Back, then power menu (09:31) | clean, mounted 6 s after boot completed |
+
+  So the install itself does not leave the card dirty; the install screen's Reboot button does. In every case the card was mounted at the end.
+- Reinstalling the module replaces its folder, so `check.log` starts empty after each install.
 
 ## Not tested yet
 

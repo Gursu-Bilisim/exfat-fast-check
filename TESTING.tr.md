@@ -62,7 +62,17 @@ Testlerden sonra salt okunur tam denetim: `clean. directories 8731, files 35329`
 
 - `sys.boot_completed`, vold kartı listeye eklemeden önce geliyor; o anda `sm list-volumes public` boş dönüyor, kart yaklaşık 10 saniye sonra `checking` olarak görünüyor. `service.sh` bu yüzden listeye 5 dakikaya kadar bakıyor.
 - Hybrid Mount ile yönetici uygulama, Hybrid Mount kurulduktan sonra bir açılış geçmeden başka modül kabul etmiyor.
-- FolkPatch kurulum ekranındaki Yeniden Başlat düğmesiyle yapılan üç açılışta da (08:09, 08:47, 09:02) kart kirli kaldı; güç menüsünden yapılan yeniden başlatmalarda (03:38, 09:11) temiz kaldı. Her iki durumda da kart sonunda bağlandı.
+- Yeniden başlatma yolu ve sonraki açılışta kartın durumu:
+
+  | Yeniden başlatma | Kart |
+  |---|---|
+  | FolkPatch kurulum ekranındaki Yeniden Başlat (08:09, 08:47, 09:02) | kirli, `service.sh` onardı |
+  | Sistem güç menüsü (09:11) | temiz, `Check OK` |
+  | FolkPatch ana ekranındaki güç simgesi (09:25) | temiz, `Check OK` (denetim 9 ms) |
+  | Modül yeniden kuruldu, kurulum ekranından Geri ile çıkıldı, güç menüsü (09:31) | temiz, açılış tamamlandıktan 6 sn sonra bağlandı |
+
+  Kurulumun kendisi kartı kirletmiyor; kirleten kurulum ekranındaki Yeniden Başlat düğmesi. Her durumda kart sonunda bağlandı.
+- Modülü yeniden kurmak klasörünü değiştirdiği için `check.log` her kurulumdan sonra boş başlıyor.
 
 ## Henüz denenmeyenler
 

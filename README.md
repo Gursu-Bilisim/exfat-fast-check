@@ -67,7 +67,7 @@ The module does not change what happens to a card that is marked dirty: it still
 
    ![Install log](docs/img/en/04-install-log.png)
 
-8. After the reboot the module appears in System Module as exFAT Fast Check v1.0. With Hybrid Mount, its line shows `OverlayFS: 1`. The Reboot button on the install screen does not unmount the card first; on that boot the card is repaired about two minutes after startup. Later reboots from the power menu mount it right away.
+8. After the reboot the module appears in System Module as exFAT Fast Check v1.0. With Hybrid Mount, its line shows `OverlayFS: 1`. The Reboot button on FolkPatch's install screen does not unmount the card first, so on that boot the card is repaired and mounted about two minutes after startup. To avoid the wait, leave the install screen with Back and reboot from the power menu or from the power icon on FolkPatch's home screen.
 
    ![Module list after reboot](docs/img/en/05-module-list.png)
 

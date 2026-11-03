@@ -67,7 +67,7 @@ Modül kirli işaretli bir kartın denetimini atlamaz: tam denetim yine yapılı
 
    ![Kurulum kaydı](docs/img/tr/04-install-log.png)
 
-8. Açılıştan sonra modül Sistem Modülü sekmesinde exFAT Fast Check v1.0 olarak görünür. Hybrid Mount kullanılıyorsa onun satırında `OverlayFS: 1` yazar. Kurulum ekranındaki Yeniden Başlat düğmesi kartı önce ayırmıyor; o açılışta kart yaklaşık iki dakika sonra onarılıp bağlanır. Güç menüsünden yapılan sonraki yeniden başlatmalarda kart hemen bağlanır.
+8. Açılıştan sonra modül Sistem Modülü sekmesinde exFAT Fast Check v1.0 olarak görünür. Hybrid Mount kullanılıyorsa onun satırında `OverlayFS: 1` yazar. FolkPatch kurulum ekranındaki Yeniden Başlat düğmesi kartı önce ayırmıyor; o açılışta kart yaklaşık iki dakika sonra onarılıp bağlanır. Beklememek için kurulum ekranından Geri ile çık ve güç menüsünden ya da FolkPatch ana ekranındaki güç simgesinden yeniden başlat.
 
    ![Açılıştan sonra modül listesi](docs/img/tr/05-module-list.png)
 
