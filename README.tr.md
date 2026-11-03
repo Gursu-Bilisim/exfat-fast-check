@@ -51,9 +51,9 @@ Modül kirli işaretli bir kartın denetimini atlamaz: tam denetim yine yapılı
    adb push exfat-fast-check-v1.0.zip /sdcard/Download/
    ```
 3. FolkPatch / APatch / KernelSU: yönetici uygulaman `system/` dosyaları için bir metamodül istiyorsa (örneğin Hybrid Mount) önce onu kur ve bir kez yeniden başlat. Yeniden başlatmadan uygulama başka modül kabul etmiyor.
-4. Yönetici uygulamada: Modüller → Depolamadan yükle → `Download/exfat-fast-check-v1.0.zip`.
-   <!-- ekran görüntüsü: docs/img/tr/01-depolamadan-yukle.png -->
-5. Yeniden başlat.
+4. FolkPatch: Sistem Modülü sekmesini aç, sağ alttaki yuvarlak düğmeye ve ardından Kur'a dokun. Dosya seçicide İndirilenler'i aç, `exfat-fast-check-v1.0.zip` dosyasını seç ve Seç'e dokun. Onay penceresinde Tamam'a dokun.
+5. Kurulum kaydı `- Done` satırıyla biter. Yeniden Başlat'a dokun.
+6. Açılıştan sonra modül Sistem Modülü sekmesinde exFAT Fast Check v1.0 olarak görünür.
 
 ## Sonucu kontrol etme
 
@@ -82,8 +82,14 @@ Temiz bir kartta açılıştan birkaç saniye sonra `I vold : Check OK` görün�
 
 ## Elle kullanım
 
-- Salt okunur tam denetim: `su -c '/system/bin/fsck.exfat-full -n /dev/block/mmcblk0p1'`
-- Açılıştan sonra bağlanamaz hale gelen kartı (örneğin sonradan takılan) onarmak: `su -c sh /data/adb/modules/exfat-fast-check/service.sh`
+Bilgisayardan (adb):
+
+```
+adb shell "su -c '/system/bin/fsck.exfat-full -n /dev/block/mmcblk0p1'"
+adb shell "su -c 'sh /data/adb/modules/exfat-fast-check/service.sh'"
+```
+
+İlk satır salt okunur tam denetim yapar. İkincisi açılıştan sonra bağlanamaz hale gelen kartı (örneğin sonradan takılanı) onarır. Cihazdaki bir terminal uygulamasında çift tırnak içindeki kısmı çalıştır.
 
 ## ROM güncellemesinden sonra
 

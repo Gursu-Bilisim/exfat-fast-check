@@ -51,9 +51,9 @@ The module does not change what happens to a card that is marked dirty: it still
    adb push exfat-fast-check-v1.0.zip /sdcard/Download/
    ```
 3. FolkPatch / APatch / KernelSU: if your manager needs a metamodule for `system/` files (for example Hybrid Mount), install that first and reboot once. Without the reboot the manager does not accept other modules.
-4. In the manager app: Modules → Install from storage → `Download/exfat-fast-check-v1.0.zip`.
-   <!-- screenshot: docs/img/en/01-install-from-storage.png -->
-5. Reboot.
+4. FolkPatch: open the System Module tab, tap the round button at the bottom right, then Install. In the file picker open Downloads, select `exfat-fast-check-v1.0.zip` and tap Select. Confirm with OK.
+5. The install log ends with `- Done`. Tap Reboot.
+6. After the reboot the module appears in System Module as exFAT Fast Check v1.0.
 
 ## Checking the result
 
@@ -82,8 +82,14 @@ A clean card shows `I vold : Check OK` a few seconds after boot. An `avc ... fsc
 
 ## Manual use
 
-- Full check, read-only: `su -c '/system/bin/fsck.exfat-full -n /dev/block/mmcblk0p1'`
-- Repair a card that became unmountable after boot (for example inserted later): `su -c sh /data/adb/modules/exfat-fast-check/service.sh`
+From a computer (adb):
+
+```
+adb shell "su -c '/system/bin/fsck.exfat-full -n /dev/block/mmcblk0p1'"
+adb shell "su -c 'sh /data/adb/modules/exfat-fast-check/service.sh'"
+```
+
+The first line runs a read-only full check. The second repairs a card that became unmountable after boot (for example one inserted later). In a terminal app on the device, run the part inside the double quotes.
 
 ## After a ROM update
 
