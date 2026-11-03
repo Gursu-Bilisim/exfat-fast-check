@@ -1,0 +1,6 @@
+id=exfat-fast-check
+name=exFAT Fast Check
+version=v1.0
+versionCode=1
+author=kgursu (Gursu-Bilisim @ GitHub)
+description=Skips vold's 45 s fsck on clean exFAT cards and repairs a card left dirty after boot without the time limit. / Temiz exFAT kartlarda vold'un 45 sn'lik denetimini atlar, kirli kalan kartı açılıştan sonra süre sınırı olmadan onarır.

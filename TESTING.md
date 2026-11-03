@@ -1,0 +1,46 @@
+# Test notes
+
+[Türkçe](TESTING.tr.md)
+
+Device: SM-T970 (gts7xlwifi), LineageOS `24.0-20261029-nightly`, FolkPatch 115404 (KernelPatch 0.13.9), Hybrid Mount (OverlayFS mode). Card: 2 TB exFAT, 8730 directories, 35329 files. exfatprogs 1.4.3. Tests made with the earlier Turkish-named build (`exfat-hizli-denetim` v1.1 and v1.3); v1.0 of this repository has the same logic with English names.
+
+## Before the module
+
+- Every boot: `Check failed (code 110)`, card `unmountable`.
+- Root, read-only full check: `clean`, 1m17.56s real.
+- After a manual `fsck.exfat -y`: VolumeFlags `00 00`. After the next `sm mount` (killed at 45 s): `02 00` again.
+
+## Wrapper in place
+
+`ls -lZ` shows `/system/bin/fsck.exfat` (27304 bytes) and `/system/bin/fsck.exfat-full` (77624 bytes), both `u:object_r:fsck_exec:s0`. No `avc` denial from the module.
+
+## Clean card, normal reboot
+
+```
+03:38:56  I vold : Check OK
+public:179,1 mounted 5A75-7508
+```
+
+## Card marked dirty on purpose
+
+Card unmounted, VolumeFlags set to `02` by hand, reboot. vold's check (real check via the wrapper) was killed at 45 s, then `service.sh`:
+
+```
+06:34:40 boot completed
+06:35:33 public:179,1 (5A75-7508): unmountable, VolumeFlags=0x02, full check started
+/dev/block/vold/public:179,1: clean. directories 8731, files 35329
+06:36:50 public:179,1: full check finished, exit code 0
+06:36:51 public:179,1: sm mount requested
+06:36:57 public:179,1 (5A75-7508): mounted
+```
+
+## Found during testing
+
+- `sys.boot_completed` is set before vold lists the card; at that moment `sm list-volumes public` returns nothing and the card appears about 10 seconds later as `checking`. `service.sh` therefore polls the list for up to 5 minutes.
+- With Hybrid Mount, the manager accepts other modules only after one reboot following the Hybrid Mount install.
+
+## Not tested yet
+
+- Magisk, KernelSU, APatch
+- Card inserted after boot
+- FAT32 cards (the wrapper only handles exFAT; other file systems go to their own checker unchanged)

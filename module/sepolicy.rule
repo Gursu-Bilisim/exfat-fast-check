@@ -1,0 +1,1 @@
+allow fsck_untrusted fsck_exec file execute_no_trans
