@@ -55,8 +55,6 @@ The module does not change what happens to a card that is marked dirty: it still
    <!-- screenshot: docs/img/en/01-install-from-storage.png -->
 5. Reboot.
 
-If the earlier Turkish-named build (`exfat-hizli-denetim`) is installed, the installer marks it for removal on the next reboot.
-
 ## Checking the result
 
 After boot (allow 3 minutes if the card was dirty):

@@ -55,8 +55,6 @@ Modül kirli işaretli bir kartın denetimini atlamaz: tam denetim yine yapılı
    <!-- ekran görüntüsü: docs/img/tr/01-depolamadan-yukle.png -->
 5. Yeniden başlat.
 
-Türkçe adlı önceki derleme (`exfat-hizli-denetim`) kuruluysa kurulum onu bir sonraki açılışta kaldırılmak üzere işaretler.
-
 ## Sonucu kontrol etme
 
 Açılıştan sonra (kart kirliyse 3 dakika bekle):
