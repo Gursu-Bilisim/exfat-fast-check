@@ -48,10 +48,21 @@ Kart ayrıldı, VolumeFlags elle `02` yapıldı, yeniden başlatıldı. vold'un 
 
 Sarmalayıcı ve kopya yerinde (`grep -c` = 2, iki dosya da `u:object_r:fsck_exec:s0`); Türkçe adlı önceki modülü kurulum kaldırdı.
 
+Ardından güç menüsünden normal yeniden başlatma (09:11), onarım gerekmedi:
+
+```
+09:11:57 boot completed
+09:12:04 I vold : Check OK
+09:12:08 public:179,1 (5A75-7508): mounted
+```
+
+Testlerden sonra salt okunur tam denetim: `clean. directories 8731, files 35329`.
+
 ## Test sırasında bulunanlar
 
 - `sys.boot_completed`, vold kartı listeye eklemeden önce geliyor; o anda `sm list-volumes public` boş dönüyor, kart yaklaşık 10 saniye sonra `checking` olarak görünüyor. `service.sh` bu yüzden listeye 5 dakikaya kadar bakıyor.
 - Hybrid Mount ile yönetici uygulama, Hybrid Mount kurulduktan sonra bir açılış geçmeden başka modül kabul etmiyor.
+- FolkPatch kurulum ekranındaki Yeniden Başlat düğmesiyle yapılan üç açılışta da (08:09, 08:47, 09:02) kart kirli kaldı; güç menüsünden yapılan yeniden başlatmalarda (03:38, 09:11) temiz kaldı. Her iki durumda da kart sonunda bağlandı.
 
 ## Henüz denenmeyenler
 

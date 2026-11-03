@@ -48,10 +48,21 @@ Installed over the test build at 08:46 and rebooted from the installer's Reboot 
 
 Wrapper and copy in place (`grep -c` = 2, both files `u:object_r:fsck_exec:s0`); the earlier Turkish-named module was removed by the installer.
 
+Normal reboot from the power menu afterwards (09:11), no repair needed:
+
+```
+09:11:57 boot completed
+09:12:04 I vold : Check OK
+09:12:08 public:179,1 (5A75-7508): mounted
+```
+
+Read-only full check after the tests: `clean. directories 8731, files 35329`.
+
 ## Found during testing
 
 - `sys.boot_completed` is set before vold lists the card; at that moment `sm list-volumes public` returns nothing and the card appears about 10 seconds later as `checking`. `service.sh` therefore polls the list for up to 5 minutes.
 - With Hybrid Mount, the manager accepts other modules only after one reboot following the Hybrid Mount install.
+- Rebooting with the Reboot button on FolkPatch's install screen left the card dirty in all three cases (08:09, 08:47, 09:02); a reboot from the power menu (03:38, 09:11) left it clean. In both cases the card was mounted at the end.
 
 ## Not tested yet
 
