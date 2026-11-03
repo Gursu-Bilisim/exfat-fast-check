@@ -15,7 +15,7 @@ E vold    : Check failed (code 110)
 E vold    : public:179,1 failed filesystem check
 ```
 
-and the card is reported as damaged ("Issue with SD card"). Code 110 is `ETIMEDOUT`. On a large, well-filled card the full check takes longer than that even when the file system is healthy. Example from the test device (2 TB card, 8730 directories, 35329 files, exfatprogs 1.4.3, run as root):
+and the card is reported as damaged ("Issue with SD card"). Code 110 is `ETIMEDOUT`. On a large, well-filled card the full check takes longer than that even when the file system is healthy. Example from the test device (1 TB card, 8730 directories, 35329 files, exfatprogs 1.4.3, run as root):
 
 ```
 fsck.exfat -n /dev/block/mmcblk0p1: clean. directories 8730, files 35329

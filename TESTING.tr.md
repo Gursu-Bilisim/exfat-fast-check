@@ -2,7 +2,7 @@
 
 [English](TESTING.md)
 
-Cihaz: SM-T970 (gts7xlwifi), LineageOS `24.0-20261029-nightly`, FolkPatch 115404 (KernelPatch 0.13.9), Hybrid Mount 6.2.5 (OverlayFS kipi). Kart: 2 TB exFAT, 8730 dizin, 35329 dosya. exfatprogs 1.4.3. Testler Türkçe adlı önceki derlemeyle (`exfat-hizli-denetim` v1.1 ve v1.3) yapıldı; bu deponun v1.0 sürümü aynı mantığı İngilizce adlarla içeriyor.
+Cihaz: SM-T970 (gts7xlwifi), LineageOS `24.0-20261029-nightly`, FolkPatch 115404 (KernelPatch 0.13.9), Hybrid Mount 6.2.5 (OverlayFS kipi). Kart: 1 TB exFAT, 8730 dizin, 35329 dosya. exfatprogs 1.4.3. Testler Türkçe adlı önceki derlemeyle (`exfat-hizli-denetim` v1.1 ve v1.3) yapıldı; bu deponun v1.0 sürümü aynı mantığı İngilizce adlarla içeriyor.
 
 ## Modülden önce
 

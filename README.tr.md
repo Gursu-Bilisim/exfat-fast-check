@@ -15,7 +15,7 @@ E vold    : Check failed (code 110)
 E vold    : public:179,1 failed filesystem check
 ```
 
-Kart da bozuk olarak gösteriliyor ("SD kartla ilgili sorun"). 110 kodu `ETIMEDOUT`. Büyük ve dolu bir kartta dosya sistemi sağlam olsa bile tam denetim bu süreyi aşıyor. Test cihazından örnek (2 TB kart, 8730 dizin, 35329 dosya, exfatprogs 1.4.3, root ile):
+Kart da bozuk olarak gösteriliyor ("SD kartla ilgili sorun"). 110 kodu `ETIMEDOUT`. Büyük ve dolu bir kartta dosya sistemi sağlam olsa bile tam denetim bu süreyi aşıyor. Test cihazından örnek (1 TB kart, 8730 dizin, 35329 dosya, exfatprogs 1.4.3, root ile):
 
 ```
 fsck.exfat -n /dev/block/mmcblk0p1: clean. directories 8730, files 35329

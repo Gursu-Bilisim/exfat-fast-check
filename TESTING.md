@@ -2,7 +2,7 @@
 
 [Türkçe](TESTING.tr.md)
 
-Device: SM-T970 (gts7xlwifi), LineageOS `24.0-20261029-nightly`, FolkPatch 115404 (KernelPatch 0.13.9), Hybrid Mount 6.2.5 (OverlayFS mode). Card: 2 TB exFAT, 8730 directories, 35329 files. exfatprogs 1.4.3. Tests made with the earlier Turkish-named build (`exfat-hizli-denetim` v1.1 and v1.3); v1.0 of this repository has the same logic with English names.
+Device: SM-T970 (gts7xlwifi), LineageOS `24.0-20261029-nightly`, FolkPatch 115404 (KernelPatch 0.13.9), Hybrid Mount 6.2.5 (OverlayFS mode). Card: 1 TB exFAT, 8730 directories, 35329 files. exfatprogs 1.4.3. Tests made with the earlier Turkish-named build (`exfat-hizli-denetim` v1.1 and v1.3); v1.0 of this repository has the same logic with English names.
 
 ## Before the module
 
