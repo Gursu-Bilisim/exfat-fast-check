@@ -67,7 +67,7 @@ Modül kirli işaretli bir kartın denetimini atlamaz: tam denetim yine yapılı
 
    ![Kurulum kaydı](docs/img/tr/04-install-log.png)
 
-8. Açılıştan sonra modül Sistem Modülü sekmesinde exFAT Fast Check v1.0 olarak görünür. Hybrid Mount kullanılıyorsa onun satırında `OverlayFS: 1` yazar. Kart yeniden başlatmadan önce düzgün ayrılmadıysa açılıştan yaklaşık iki dakika sonra onarılıp bağlanır; ayrıldıysa hemen bağlanır. Testlerde sekiz yeniden başlatmanın üçünde bu oldu; sebebi henüz bilinmiyor (bkz. [TESTING.tr.md](TESTING.tr.md)).
+8. Açılıştan sonra modül Sistem Modülü sekmesinde exFAT Fast Check v1.0 olarak görünür. Hybrid Mount kullanılıyorsa onun satırında `OverlayFS: 1` yazar. Kart yeniden başlatmadan önce düzgün ayrılmadıysa açılıştan yaklaşık iki dakika sonra onarılıp bağlanır; ayrıldıysa hemen bağlanır. Testlerde on yeniden başlatmanın üçünde bu oldu ve sonradan tekrarlanamadı (bkz. [TESTING.tr.md](TESTING.tr.md)).
 
    ![Açılıştan sonra modül listesi](docs/img/tr/05-module-list.png)
 

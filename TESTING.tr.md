@@ -72,8 +72,9 @@ Testlerden sonra salt okunur tam denetim: `clean. directories 8731, files 35329`
   | Modül yeniden kuruldu, kurulum ekranından Geri ile çıkıldı, FolkPatch güç simgesi (09:31) | temiz, açılış tamamlandıktan 6 sn sonra bağlandı |
   | Sistem güç düğmesi (09:44) | temiz |
   | Modül yeniden kuruldu, kurulum ekranındaki Yeniden Başlat (09:55) | temiz, açılış tamamlandıktan 16 sn sonra bağlandı |
+  | Modül kaldırıldı, kart birkaç dakika önce elle onarılıp bağlandı, sıfır kurulum, kurulum ekranındaki Yeniden Başlat (10:17) | temiz |
 
-  FolkPatch kaynağında (commit `0f3f42b`, test edilen yönetici sürümü) kurulum ekranındaki Yeniden Başlat düğmesi (`ui/screen/patches/Install.kt`) ile ana ekrandaki Yeniden Başlat seçeneği (`ui/screen/home/HomeTopBar.kt`) aynı `reboot()` fonksiyonunu (`util/APatchCli.kt`) çağırıyor: `/system/bin/svc power reboot || /system/bin/reboot`. Düğmeler arasında fark yok ve 09:55'te kurulum ekranındaki düğmeyle yapılan deneme kartı temiz bıraktı; önceki üç açılışta kartı neyin kirli bıraktığı henüz bilinmiyor. Her durumda kart sonunda bağlandı.
+  FolkPatch kaynağında (commit `0f3f42b`, test edilen yönetici sürümü) kurulum ekranındaki Yeniden Başlat düğmesi (`ui/screen/patches/Install.kt`) ile ana ekrandaki Yeniden Başlat seçeneği (`ui/screen/home/HomeTopBar.kt`) aynı `reboot()` fonksiyonunu (`util/APatchCli.kt`) çağırıyor: `/system/bin/svc power reboot || /system/bin/reboot`. Düğmeler arasında fark yok. 09:54 ve 10:17 kapanışlarında kaydedilen logcat iki seferde de aynı sırayı gösteriyor: `svc` → `ShutdownThread` → `init: Received sys.powerctl='reboot,' from pid ... (system_server)` → yaklaşık bir saniye sonra vold'un kartın FUSE yollarını ayırması. İki deneme de kartı temiz bıraktı; önceki üç açılışta kartı neyin kirli bıraktığı bilinmiyor. Her durumda kart sonunda bağlandı.
 - Modülü yeniden kurmak klasörünü değiştirdiği için `check.log` her kurulumdan sonra boş başlıyor.
 
 ## Henüz denenmeyenler

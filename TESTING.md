@@ -72,8 +72,9 @@ Read-only full check after the tests: `clean. directories 8731, files 35329`.
   | Module reinstalled, install screen left with Back, then FolkPatch's power icon (09:31) | clean, mounted 6 s after boot completed |
   | System power button (09:44) | clean |
   | Module reinstalled, Reboot button on the install screen (09:55) | clean, mounted 16 s after boot completed |
+  | Module removed, card repaired and mounted by hand a few minutes earlier, fresh install, Reboot button on the install screen (10:17) | clean |
 
-  In FolkPatch's source (commit `0f3f42b`, the tested manager build) both the install screen's Reboot button (`ui/screen/patches/Install.kt`) and the home screen's Reboot entry (`ui/screen/home/HomeTopBar.kt`) call the same `reboot()` in `util/APatchCli.kt`, which runs `/system/bin/svc power reboot || /system/bin/reboot`. The buttons themselves do not differ, and the 09:55 run with the install screen's button left the card clean; what made the card dirty on the three earlier boots is not known yet. In every case the card was mounted at the end.
+  In FolkPatch's source (commit `0f3f42b`, the tested manager build) both the install screen's Reboot button (`ui/screen/patches/Install.kt`) and the home screen's Reboot entry (`ui/screen/home/HomeTopBar.kt`) call the same `reboot()` in `util/APatchCli.kt`, which runs `/system/bin/svc power reboot || /system/bin/reboot`. The buttons themselves do not differ. logcat captured during the 09:54 and 10:17 shutdowns shows the same sequence both times: `svc` → `ShutdownThread` → `init: Received sys.powerctl='reboot,' from pid ... (system_server)` → vold unmounting the card's FUSE paths about one second later. Neither run left the card dirty; what made the card dirty on the three earlier boots is not known. In every case the card was mounted at the end.
 - Reinstalling the module replaces its folder, so `check.log` starts empty after each install.
 
 ## Not tested yet
